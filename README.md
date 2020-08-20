@@ -35,3 +35,4 @@ This section will notify users if any tests are available to test scripts. For e
 > npm run test
 
 
+<img src="./assets/Team-Profile-Generator-TEST.gif">
