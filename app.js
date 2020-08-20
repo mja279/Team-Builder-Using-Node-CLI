@@ -93,6 +93,14 @@ promptUser()
         if (data.role === "Manager") {
             const newManager = new Manager(name, id, email, officeNumber);
             employees.push(newManager);
+        }
+        if (data.role === "Engineer") {
+            const newEngineer = new Engineer(name, id, email, github);
+            employees.push(newEngineer);
+        } 
+        if (data.role === "Intern") {
+            const newIntern = new Intern (name, id, email, school);
+            employees.push(newIntern);
         } 
         const renderEmployees = render(employees);
         fs.writeFile(outputPath, renderEmployees, function() {
