@@ -15,70 +15,69 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 // output
 const render = require("./lib/htmlRenderer");
 
-
-const questions = [
-    {
-        type: "list",
-        name: "role",
-        message: "What type of employee would you like to add?",
-        choices: ["Manager", "Engineer","Intern"]
-    },
-    {
-        type: "input",
-        name: "name",
-        message: "What is the employee's name?"
-    },
-    {
-        type: "input",
-        name: "id",
-        message: "What is the employee's ID?"
-    },
-    {
-        type: "input",
-        name: "email",
-        message: "What is the employee's email?"
-    },
-    {
-        type: "input",
-        name: "officeNumber",
-        message: "What is the manager's phone number?",
-        when: function (answers) {
-            return answers.role === "Manager";
-        }
-    },
-    {
-        type: "input",
-        name: "github",
-        message: "What is the engineer's GitHub name?",
-        when: function (answers) {
-            return answers.role === "Engineer";
-        }
-    },
-    {
-        type: "input",
-        name: "school",
-        message: "What school does the intern attend?",
-        when: function (answers) {
-            return answers.role === "Intern";
-        }
-    },
-    {
-        type: "list",
-        name: "add",
-        message: "Would you like to add more employees?",
-        choices: ["Yes", "No, I'm done!"]
-    }
-]
+const employees = [];  
 
 function promptUser() {
-    return inquirer.prompt(questions)
-};
+    return inquirer.prompt([
+        {
+            type: "list",
+            name: "role",
+            message: "What type of employee would you like to add?",
+            choices: ["Manager", "Engineer","Intern"]
+        },
+        {
+            type: "input",
+            name: "name",
+            message: "What is the employee's name?"
+        },
+        {
+            type: "input",
+            name: "id",
+            message: "What is the employee's ID?"
+        },
+        {
+            type: "input",
+            name: "email",
+            message: "What is the employee's email?"
+        },
+        {
+            type: "input",
+            name: "officeNumber",
+            message: "What is the manager's phone number?",
+            when: function (answers) {
+                return answers.role === "Manager";
+            }
+        },
+        {
+            type: "input",
+            name: "github",
+            message: "What is the engineer's GitHub name?",
+            when: function (answers) {
+                return answers.role === "Engineer";
+            }
+        },
+        {
+            type: "input",
+            name: "school",
+            message: "What school does the intern attend?",
+            when: function (answers) {
+                return answers.role === "Intern";
+            }
+        },
+        {
+            type: "list",
+            name: "add",
+            message: "Would you like to add more employees?",
+            choices: ["Yes", "No, I'm done!"]
+        }
+    ]);
+}
 
-promptUser() 
-    .then(function(data){
-        console.log(data);
+async function init() {
 
-        const employees = [];   
+
+    try {
+        const data = await promptUser();
 
         if (data.role === "Manager") {
             const newManager = new Manager(data.name, data.id, data.email, data.officeNumber);
@@ -88,7 +87,7 @@ promptUser()
             const newEngineer = new Engineer(data.name, data.id, data.email, data.github);
             employees.push(newEngineer);
         } 
-        else if (data.role === "Intern") {
+        else { (data.role === "Intern") 
             const newIntern = new Intern(data.name, data.id, data.email, data.school);
             employees.push(newIntern);
         }
@@ -101,15 +100,11 @@ promptUser()
         if (data.add === "Yes") {
             promptUser();
         }
-    })
-    .then(function() {
-        console.log("File has been written");
-    })
-    .catch(function(err){
+    }
+    catch(err){
         console.log(err);
-    })
+    }
+}
 
+init();
 
-  
-
-    
