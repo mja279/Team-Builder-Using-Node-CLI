@@ -62,12 +62,6 @@ const questions = [
             return answers.role === "Intern";
         }
     },
-    // {
-    //     type: "confirm",
-    //     name: "add",
-    //     message: "Would you like to add more team members?",
-    //     default: true
-    //     },
     {
         type: "list",
         name: "add",
