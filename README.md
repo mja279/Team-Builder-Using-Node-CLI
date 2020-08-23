@@ -4,7 +4,7 @@
 
 This application uses Node CLI to gather information about employees and generates an HTML webpage that displays summaries for each person
 
-<img src="./assets/Team-Profile-Generator-Node.gif">
+<img src="./assets/Mike-Scott-Example.gif">
 
 ## Table of Contents
 
