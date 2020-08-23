@@ -93,7 +93,7 @@ async function init() {
 
         const renderEmployees = render(employees);
         fs.writeFile(outputPath, renderEmployees, function() {
-        //    console.log(err);
+           console.log("Your team has been created!");
         })
 
         if (data.add === "Yes") {
