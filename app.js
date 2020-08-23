@@ -75,7 +75,6 @@ function promptUser() {
 
 async function init() {
 
-
     try {
         const data = await promptUser();
 
@@ -93,12 +92,12 @@ async function init() {
         }
 
         const renderEmployees = render(employees);
-        fs.writeFile(outputPath, renderEmployees, function(err) {
-           console.log(err);
+        fs.writeFile(outputPath, renderEmployees, function() {
+        //    console.log(err);
         })
 
         if (data.add === "Yes") {
-            promptUser();
+            await init();
         }
     }
     catch(err){
